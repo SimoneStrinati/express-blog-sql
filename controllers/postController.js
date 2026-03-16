@@ -100,13 +100,20 @@ const controllers = {
 
         const id = Number(req.params.id);
 
-        const risultato = posts.find(post => post.id == id);
+        if (isNaN(id)) {
+            return res.status(400).json({ error: "User Error", message: "Id non valido" })
+        }
 
-        posts.splice(posts.indexOf(risultato), 1);
+        const sqlQuery = "DELETE FROM posts WHERE id = ?";
+        const queryParam = [id];
 
-        console.log(`Hai eliminato il post: ${id}`, posts);
+        dbConnection.query(sqlQuery, queryParam, error => {
+            if (error) {
+                res.status(500).json({ errore: "Database Error", message: "Impossibile eliminare post ${id}" })
+            }
 
-        res.sendStatus(204);
+            return res.sendStatus(204);
+        });
     }
 
 };

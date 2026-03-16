@@ -1,0 +1,16 @@
+{
+  "name": "express-routing",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Simone Strinati",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

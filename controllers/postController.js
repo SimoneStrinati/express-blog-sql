@@ -1,4 +1,4 @@
-const posts = require("../data/posts")
+const dbConnection = require("../data/db")
 
 
 const controllers = {

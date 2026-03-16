@@ -5,17 +5,23 @@ const controllers = {
 
     index: function (req, res) {
 
-        let risultati = posts
 
-        niente.prova()//Test midddleware
+        const sqlQuery = "SELECT * FROM posts";
 
+        dbConnection.query(sqlQuery, (error, rows) => {
+            if (error) {
+                return res.status(500).json({ error: "Database Error", message: 'Errore di richiesta al DB' })
+            }
 
-        if (req.query.tags) {
+            let results = rows;
 
-            risultati = posts.filter(post => post.tags.find(tag => tag.toLowerCase() === req.query.tags.toLowerCase()));
-        }
+            // if (req.query.tags) {
+            //     results = rows.filter(post => post.tags.find(tag => tag.toLowerCase() === req.query.tags.toLowerCase()));
+            // }  
+            // Per ora non serve perché non abbiamo ancora il dato "tag", ma sarà utile a cose fatte una volta fatta la relazione tra tabelle
 
-        res.json(risultati);
+            res.json(results);
+        })
     },
 
     show: function (req, res) {
